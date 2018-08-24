@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +52,17 @@ public class SpringDataService {
         return zooRepository.findByNombre(zooName).getAnimals();
 
     }
+
+    public Map<String,Object> makeZoosDto(List<Zoo> zoos){
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("zoos",makeZoosList(zoos));
+        return dto;
+    }
+
+    public List<Object> makeZoosList(List<Zoo> zoos){
+        return zoos.stream().map(z->makeZooDto(z.getId())).collect(Collectors.toList());
+    }
+
 
     public Map<String,Object> makeZooDto(Long zooId){
         Zoo zoo = zooRepository.findById(zooId).get();

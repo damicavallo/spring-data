@@ -5,7 +5,6 @@ import com.accenture.springdata.service.SpringDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +12,12 @@ import java.util.Map;
 public class SpringDataController {
 
     @Autowired SpringDataService springDataService;
+
+    @GetMapping("/zoos")
+    @ResponseBody
+    public Map<String,Object> getZoos(){
+        return springDataService.makeZoosDto(getAllZoo());
+        }
 
     @GetMapping("/zoo")
     @ResponseBody
@@ -49,11 +54,7 @@ public class SpringDataController {
         return true;
     }
 
-   /* @GetMapping("zoo/{zooNombre}/animals")
-    @ResponseBody
-    public List<Animal> getAnimals(@PathVariable String zooNombre){
-            return springDataService.getAllAnimals(zooNombre);
-    }*/
+
 
     @GetMapping("/zoo/{zooId}/animals")
     @ResponseBody
