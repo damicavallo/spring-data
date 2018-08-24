@@ -16,7 +16,7 @@ public class Zoo {
     private String direccion;
 
     private String telefono;
-
+//
     @OneToMany( mappedBy = "zoo")
     private List<Animal> animals;
 
@@ -53,7 +53,7 @@ public class Zoo {
     public void addAnimal (Animal animal){
         animal.setZoo(this);
         animals.add(animal);
-        
+
     }
 
     public void setAnimals(List<Animal> animals) {
