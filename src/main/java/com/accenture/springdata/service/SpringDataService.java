@@ -55,6 +55,8 @@ public class SpringDataService {
 
     public Map<String,Object> makeZoosDto(List<Zoo> zoos){
         Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("titulo", "Spring Data Project");
+        dto.put("subtitulo", "Zoológico");
         dto.put("zoos",makeZoosList(zoos));
         return dto;
     }

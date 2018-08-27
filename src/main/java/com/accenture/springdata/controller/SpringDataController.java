@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/zoo")
 public class SpringDataController {
 
     @Autowired SpringDataService springDataService;
@@ -17,22 +18,22 @@ public class SpringDataController {
     @ResponseBody
     public Map<String,Object> getZoos(){
         return springDataService.makeZoosDto(getAllZoo());
-        }
+    }
 
-    @GetMapping("/zoo")
+    @GetMapping("/")
     @ResponseBody
     public List<Zoo> getAllZoo(){
         return springDataService.getAll();
     }
 
-    @PostMapping("/zoo")
+    @PostMapping("/")
     @ResponseBody
     public Zoo newZoo(@RequestBody Zoo zoo){
         return springDataService.addZoo(zoo);
 
     }
 
-    @PostMapping("/zoo/zoos")
+    @PostMapping("/zoos")
     @ResponseBody
     public List<Zoo> newZoos(@RequestBody List<Zoo> zoos){
         for (Zoo zoo:zoos) {
@@ -41,13 +42,13 @@ public class SpringDataController {
         return getAllZoo();
     }
 
-    @GetMapping("/zoo/{zooId}")
+    @GetMapping("/{zooId}")
     @ResponseBody
     public Zoo getZoo(@PathVariable("zooId")Long zooId){
         return springDataService.findZooById(zooId);
     }
 
-    @PostMapping("/zoo/animal")
+    @PostMapping("/animal")
     @ResponseBody
     public boolean addAnimal(@RequestBody Animal animal){
         springDataService.addAnimal(animal);
@@ -56,7 +57,7 @@ public class SpringDataController {
 
 
 
-    @GetMapping("/zoo/{zooId}/animals")
+    @GetMapping("/{zooId}/animals")
     @ResponseBody
     public Map<String,Object> getAllAnimals(@PathVariable Long zooId){
         return springDataService.makeZooDto(zooId);
