@@ -2,10 +2,10 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/springdata?verifyServerCertificate=false&useSSL=false
     username: root
-    password: saam1234
+    password: SaAm_4106
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 server:
   port: 1000

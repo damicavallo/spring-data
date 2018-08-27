@@ -1,5 +1,7 @@
-var header = document.querySelector('header');
-var section = document.querySelector('section');
+var cabecera = document.querySelector('header');
+var cuerpo = document.querySelector('section');
+
+cuerpo.setAttribute('class', 'row');
 
 var requestURL = 'http://localhost:1000/zoo/zoos';
 var request = new XMLHttpRequest();
@@ -17,30 +19,36 @@ request.onload = function() {
 
 function theHeader(jsonObj) {
 	'use strict';
-	var h1 = document.createElement('h1');
-	h1.textContent = jsonObj.titulo;
-	header.appendChild(h1);
 	
-	var h2 = document.createElement('h2');
-	h2.textContent = jsonObj.subtitulo;
-	header.appendChild(h2);
+	var div = document.createElement('div');
+	div.setAttribute('class', 'titulo');
+	
+	var myh1 = document.createElement('h1');
+	myh1.textContent = jsonObj.titulo;
+	div.append(myh1);
+	
+	var myh2 = document.createElement('h2');
+	myh2.textContent = jsonObj.subtitulo;
+	div.append(myh2);
+	
+	cabecera.append(div);
 }
 
 function theSection(jsonObj) {
 	'use strict';
-	var theZoos = jsonObj.zoo;
+	var theZoos = jsonObj.zoos;
 	
 	for (var i = 0; i < theZoos.length; i++) {
-		var articulo = document.createElement('arcticle');
-		var h3 = document.createElement('h3');
+		var myart = document.createElement('article');
+		var myh3 = document.createElement('h3');
 		var p1 = document.createElement('p');
 		var p2 = document.createElement('p');
 		var p3 = document.createElement('p');
 		var list = document.createElement('ul');
 		
-		h3.textContent = theZoos[i].zooNombre;
+		myh3.textContent = theZoos[i].zooNombre;
 		p1.textContent = 'Telefono: ' + theZoos[i].telefono;
-		p2.textContent = 'Direccion: ' + theZoos[i].direccion;
+		p2.textContent = 'Dirección: ' + theZoos[i].direccion;
 		p3.textContent = 'Animales: ';
 		
 		var animals = theZoos[i].animales;
@@ -51,21 +59,23 @@ function theSection(jsonObj) {
 			var p4 = document.createElement('p');
 			
 			h4.textContent = animals[j].especie;
-			p4.textContent = 'Cantidad: ' + animals[i].cantidad;
+			p4.textContent = 'Cantidad: ' + animals[j].cantidad;
 			
-			li.appendChild(h4);
-			li.appendChild(p4);
+			li.append(h4);
+			li.append(p4);
 			
-			list.appendChild(li);
+			list.append(li);
 		}
 		
-		articulo.appendChild(h3);
-		articulo.appendChild(p1);
-		articulo.appendChild(p2);
-		articulo.appendChild(p3);
-		articulo.appendChild(list);
+		myart.setAttribute('class', 'col-md-3');
 		
-		section.appendChild(articulo);
+		myart.append(myh3);
+		myart.append(p1);
+		myart.append(p2);
+		myart.append(p3);
+		myart.append(list);
+		
+		cuerpo.append(myart);
 	}
 	
 	
